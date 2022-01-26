@@ -14,9 +14,13 @@ async function getProfile(){
     const userAccountname = myProfile.accountname;
     const userFollowerCount = myProfile.followerCount;
     const userFollowingCount = myProfile.followingCount;
-    const userImage = myProfile.image;
+    let userImage = myProfile.image;
     const userIntro = myProfile.intro;
     const userName = myProfile.username;
+
+    if (userImage.includes("127.0.0.1")) {
+        userImage = "../../img/basic-profile-img-.png";
+    }
 
     document.querySelector(".profile").innerHTML += `
         <img src="${userImage}" alt="${userName} 프로필사진" class="basic-profile-img" />
@@ -112,7 +116,7 @@ async function getMyPost(){
     const myPost = json.post
     console.log (json.post)
     myPost.forEach((element, index, array) => {
-        const authorImage = element.author.image
+        let authorImage = element.author.image
         const authorAccount = element.author.accountname
         const authorName = element.author.username
         const postCommentCount = element.commentCount
@@ -127,6 +131,10 @@ async function getMyPost(){
         const postCreateAtDay = postCreateAt.slice(6,8);
         const postId = element.author._id
         
+        if (authorImage.includes("127.0.0.1")) {
+            authorImage = "../../img/basic-profile-img-.png";
+        }
+
         if (postImageRaw) {
             if (postImage.length > 1){
                 console.log("if if")
@@ -351,6 +359,12 @@ async function loadPage() {
 
     console.log(takeOutPost);
   
+         
+}
+loadPage();
+
+// 모달함수
+function loadModal() {
     let navMoreBtn = document.querySelector(".call-bottom-modal");
     let bottomModal = document.querySelector(".icon-post-modal");
     let screenOverlay = document.querySelector(".screen-overlay");
@@ -438,11 +452,11 @@ async function loadPage() {
         }
 
     },200)
+}
+loadModal();
 
-    //--------------------------모달관련 끝------------------------------
-
-    // 뒤로가기 버튼
-
+// 뒤로가기 버튼
+function goBackward() {
     let btnBack = document.querySelector('#profile-nav a')
     btnBack.addEventListener('click', () => {
         // 나중에 홈페이지주소넣기
@@ -453,9 +467,9 @@ async function loadPage() {
         else {
             window.location.href = "home.html";
         }
-    })     
+    })
 }
-loadPage();
+goBackward();
 
 //글삭함수
 async function deletePost() {
