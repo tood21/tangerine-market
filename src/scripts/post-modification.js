@@ -39,7 +39,6 @@ async function getPost() {
     const img = data.post.image.split(",");
     if (img && img[0]) {
       img.forEach((src) => {
-        console.log("src", src);
         document.querySelector(".img-preview-wrap").innerHTML += `
             <li class="list-preview-img">
               <img src="${src}" alt="포스트사진" class="img-preview">
@@ -88,7 +87,6 @@ async function imageUpload(formData) {
 }
 
 function readImage(input) {
-  console.log(input.files);
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (e) => {

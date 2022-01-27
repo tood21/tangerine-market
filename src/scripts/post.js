@@ -132,7 +132,6 @@ async function getComment() {
     });
     const resJson = await res.json();
     const comments = resJson.comments;
-    console.log(resJson);
     comments.forEach((comment) => {
       const authorName = comment.author.username;
       let authorProfileImg = comment.author.image;
